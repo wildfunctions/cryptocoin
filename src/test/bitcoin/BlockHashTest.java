@@ -7,7 +7,9 @@ import org.junit.Test;
 public class BlockHashTest {
 
 	@Test
-	// checks that root is correctly calculated from previous two children nodes
+	/*
+	 * Checks that root is correctly calculated from previous two children leaflets
+	 */
 	public void checkMrklRoot() {
 		String childA = "0d0eb1b4c4b49fd27d100e9cce555d4110594661b1b8ac05a4b8879c84959bd4";
 		String childB = "bfae954bdb9653ceba3721e85a122fba3a585c5762b5ca5abe117b30c36c995e";
@@ -18,7 +20,9 @@ public class BlockHashTest {
 	}
 	
 	@Test
-	// checks that root is correctly calculated from initial children nodes
+	/*
+	 * Checks that root is correctly calculated from initial children leaflets
+	 */
 	public void checkMrklTree() {
 		String verifiedRoot = "2b12fcf1b09288fcaff797d71e950e71ae42b91e8bdb2304758dfcffc2b620e3";
 		String[] childrenNodes = {

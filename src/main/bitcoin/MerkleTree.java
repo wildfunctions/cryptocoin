@@ -10,27 +10,7 @@ public class MerkleTree {
 
 	public static void main(String[] args) {
 		MerkleTree mc = new MerkleTree();
-		Block block = new Block();
-		
-		String json = BlockLoader.load("block_example_1.json");
-		try {
-			JSONObject obj = new JSONObject(json);
-			
-			block.hash = obj.getString("hash");
-			block.ver = obj.getString("ver");
-			block.prev_block = obj.getString("prev_block");
-			block.mrkl_root = obj.getString("mrkl_root");
-			block.time = obj.getString("time");
-			block.bits = obj.getString("bits");
-			block.nonce = obj.getString("nonce");
-			block.n_tx = obj.getString("n_tx");
-			block.size = obj.getString("size");
-			block.tx = obj.getJSONArray("tx");
-			block.mrkl_tree = obj.getJSONArray("mrkl_tree");
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		Block block = BlockLoader.load("block_example_1.json");
 		
 		mc.getMerkleRoot(block);
 	}
@@ -47,7 +27,9 @@ public class MerkleTree {
 		System.out.println("Merkle Root: " + getMrklRoot(tx));
 	}
 	
-	// recursive method to get Merkle Root from String[]
+	/*
+	 * Recursive method to get Merkle Root from String[]
+	 */
 	public static String getMrklRoot(String[] arr) {
 		if(arr.length == 2) {
 			return getMrklParent(arr[0], arr[1]);
@@ -70,14 +52,16 @@ public class MerkleTree {
 		}
 	}
 	
-	// calculates the parent of two children nodes in Merkle Tree
+	/*
+	 * Calculates the parent of two children nodes in Merkle Tree
+	 */
 	public static String getMrklParent(String childA, String childB) {
 		// convert string to array of byte values
-		byte[] aBytes = Utils.hexToBytes(childA.toCharArray());
+		byte[] aBytes = Utils.hexToBytes(childA);
 		// flip bytes to reverse endianness
 		aBytes = Utils.endianFlip(aBytes);
 		
-		byte[] bBytes = Utils.hexToBytes(childB.toCharArray());
+		byte[] bBytes = Utils.hexToBytes(childB);
 		bBytes = Utils.endianFlip(bBytes);
 
 		// concat two byte arrays

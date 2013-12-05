@@ -1,10 +1,26 @@
 package lib;
 
 public class Utils {
-	
-	private static final String HEXES = "0123456789abcdef";
+
+	public static String decimalToHex(int dec) {
+		final int sizeOfIntInHalfBytes = 8;
+		final int numberOfBitsInAHalfByte = 4;
+		final int halfByte = 0x0F;
+		final char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
+				'9', 'a', 'b', 'c', 'd', 'e', 'f' };
+
+		StringBuilder hexBuilder = new StringBuilder(sizeOfIntInHalfBytes);
+		hexBuilder.setLength(sizeOfIntInHalfBytes);
+		for (int i = sizeOfIntInHalfBytes - 1; i >= 0; --i) {
+			int j = dec & halfByte;
+			hexBuilder.setCharAt(i, hexDigits[j]);
+			dec >>= numberOfBitsInAHalfByte;
+		}
+		return hexBuilder.toString();
+	}
 	
 	public static String bytesToHex(byte [] raw) {
+		final String HEXES = "0123456789abcdef";
 	    if ( raw == null ) {
 	      return null;
 	    }
@@ -34,7 +50,10 @@ public class Utils {
 		return raw;
 	}
 
-		
+	public static String endianFlip(String s) {
+		return Utils.bytesToHex((Utils.endianFlip(Utils.hexToBytes(s))));
+	}
+	
 	public static byte[] endianFlip(byte[] arr) {
 		byte[] reversedArray = new byte[arr.length];
 		int j = 0;
