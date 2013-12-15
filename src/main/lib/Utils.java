@@ -19,6 +19,10 @@ public class Utils {
 		return hexBuilder.toString();
 	}
 	
+	public static String bytesToHex(byte raw) {
+		return bytesToHex(new byte[] { raw });
+	}
+	
 	public static String bytesToHex(byte [] raw) {
 		final String HEXES = "0123456789abcdef";
 	    if ( raw == null ) {
