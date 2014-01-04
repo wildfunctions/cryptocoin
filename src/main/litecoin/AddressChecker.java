@@ -13,6 +13,7 @@ public class AddressChecker {
 	
 	public static void main(String[] args) {
 		AddressChecker ac = new AddressChecker();
+		//good
 		ac.run("LYn9mNKQbWagdVqsGNDcVcU3ggncZ6fAgh");
 		ac.run("LYr9JdPBJ2bgQGNUg4Ez2WG8ayAQ3mPyR1");
 		ac.run("LRWUJhm2bTNfrQtAhpugCAnpbt657WwnZm");
@@ -21,13 +22,9 @@ public class AddressChecker {
 		ac.run("LP4j8Q4gpyJVLPfPJENHQmxHEdtTGK43Y3");
 		ac.run("LfuqSkUiBC2zxLBhtUCP86evNW3LjXQG9q");
 
-		ac.run("LfuqSkUiBC2zZLBhtUCP86evNW3LjXQG9q");
-		ac.run("LV4svi9YUpZBiFktVNLAewintyipVQcsUs");
+		//bad
+		ac.run("LfuqSkUIBC2zZLBhtUCP86evNW3LjXQG9q");
 		ac.run("LYr9JdPBJ2bgQGNUg4Ez2WG8ayAQ3mPyR1R1");
-		
-		ac.run("1Sq2Pb5pCfPBKZ3U4SFjHMlhvAbz8Vpjk");
-		ac.run("1C8UDzgYqlhFqduhYzuAjlMQZWBvYahvD1");
-		ac.run("17FSKMPAyXGR7EQziCqbVfwleGumRosQoh");
 	}
 	
 	public boolean run(String address) {
@@ -66,13 +63,13 @@ public class AddressChecker {
         	subH3[i] = h3[i];
         }
         
-        String wtfHex = Utils.bytesToHex(subH3);
+        String h3Hex = Utils.bytesToHex(subH3);
         String checkSumhex = Utils.bytesToHex(checksum);
         
-        System.out.println(wtfHex);
+        System.out.println(h3Hex);
         System.out.println(checkSumhex);
         System.out.println("---------");
-        if(checkSumhex.equals(wtfHex)) {
+        if(checkSumhex.equals(h3Hex)) {
         	return true;
         }
         return false;
